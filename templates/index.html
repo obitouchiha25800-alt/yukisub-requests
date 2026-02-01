@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YukiSub Request Portal</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #17212b 100%);
+            color: #ffffff;
+            padding: 40px 20px;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 95%;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #a55eea 0%, #45aaf2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header h1 svg {
+            width: 40px;
+            height: 40px;
+            fill: #a55eea;
+            flex-shrink: 0;
+        }
+
+        .header p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: #a4b0be;
+            font-weight: 400;
+        }
+
+        /* Section Heading */
+        .section-heading {
+            font-family: 'Outfit', sans-serif;
+            text-align: center;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #a4b0be;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Request Form */
+        .request-form {
+            background: linear-gradient(145deg, #1e272e 0%, #242f3d 100%);
+            padding: 28px;
+            border-radius: 16px;
+            margin-bottom: 36px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(165, 94, 234, 0.15);
+        }
+
+        /* Limit Message */
+        .limit-message {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: linear-gradient(145deg, rgba(255, 159, 64, 0.15) 0%, rgba(255, 159, 64, 0.1) 100%);
+            padding: 24px 28px;
+            border-radius: 16px;
+            margin-bottom: 36px;
+            border: 2px solid rgba(255, 159, 64, 0.3);
+        }
+
+        .limit-message svg {
+            width: 40px;
+            height: 40px;
+            fill: #ffa940;
+            flex-shrink: 0;
+        }
+
+        .limit-message h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffa940;
+            margin-bottom: 6px;
+        }
+
+        .limit-message p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: #a4b0be;
+            line-height: 1.5;
+        }
+
+        .request-form h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .form-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 12px;
+            flex: 1;
+            min-width: 100%;
+        }
+
+        .input-wrapper input[name="anime_name"] {
+            flex: 2;
+            min-width: 200px;
+        }
+
+        .input-wrapper input[name="total_episodes"] {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .form-group input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 2px solid #2c3e50;
+            border-radius: 12px;
+            background-color: #181f28;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .form-group input::placeholder {
+            color: #6c7a89;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #a55eea;
+            background-color: #1a2330;
+            box-shadow: 0 0 0 4px rgba(165, 94, 234, 0.15);
+        }
+
+        .form-group button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 24px;
+            background: linear-gradient(135deg, #a55eea 0%, #45aaf2 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(165, 94, 234, 0.4);
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(165, 94, 234, 0.6);
+            background: linear-gradient(135deg, #b76efc 0%, #5abaff 100%);
+        }
+
+        .form-group button:active {
+            transform: translateY(0);
+        }
+
+        .form-group button svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
+
+        /* Requests List */
+        .requests-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .request-card {
+            background: linear-gradient(145deg, #1e272e 0%, #242f3d 100%);
+            padding: 24px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(165, 94, 234, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .request-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #a55eea 0%, #45aaf2 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .request-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(165, 94, 234, 0.2);
+        }
+
+        .request-card:hover::before {
+            opacity: 1;
+        }
+
+        .request-info {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .anime-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.3px;
+        }
+
+        .episode-progress {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: #6c7a89;
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .status-badge {
+            font-family: 'Outfit', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-pending {
+            background-color: rgba(255, 159, 64, 0.2);
+            color: #ffa940;
+            border: 1px solid rgba(255, 159, 64, 0.3);
+        }
+
+        .status-processing {
+            background-color: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+
+        .status-uploaded {
+            background-color: rgba(46, 213, 115, 0.2);
+            color: #2ed573;
+            border: 1px solid rgba(46, 213, 115, 0.3);
+        }
+
+        /* Vote Button */
+        .vote-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .vote-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 12px 16px;
+            background: linear-gradient(145deg, #2c3e50 0%, #34495e 100%);
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            min-width: 70px;
+        }
+
+        .vote-btn:hover {
+            background: linear-gradient(145deg, #e74c3c 0%, #c0392b 100%);
+            border-color: rgba(231, 76, 60, 0.3);
+            transform: scale(1.08);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .vote-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: #e74c3c;
+            transition: fill 0.3s;
+        }
+
+        .vote-btn:hover svg {
+            fill: #ffffff;
+        }
+
+        .vote-btn .vote-text {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #a4b0be;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        .vote-btn:hover .vote-text {
+            color: #ffffff;
+        }
+
+        .vote-count {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a55eea 0%, #45aaf2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: #6c7a89;
+        }
+
+        .empty-state svg {
+            width: 64px;
+            height: 64px;
+            fill: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #a4b0be;
+        }
+
+        .empty-state p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: #6c7a89;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            padding: 24px 0;
+            border-top: 1px solid rgba(165, 94, 234, 0.1);
+        }
+
+        .footer p {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: #6c7a89;
+            font-weight: 500;
+        }
+
+        .footer svg {
+            width: 16px;
+            height: 16px;
+            fill: #a55eea;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+                padding: 0;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+                letter-spacing: 1px;
+                gap: 10px;
+            }
+
+            .header h1 svg {
+                width: 32px;
+                height: 32px;
+            }
+
+            .section-heading {
+                font-size: 1rem;
+            }
+
+            .form-group {
+                flex-direction: column;
+            }
+
+            .input-wrapper {
+                flex-direction: column;
+            }
+
+            .input-wrapper input[name="anime_name"],
+            .input-wrapper input[name="total_episodes"] {
+                width: 100%;
+                min-width: unset;
+            }
+
+            .form-group button {
+                width: 100%;
+            }
+
+            .request-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+
+            .vote-section {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .anime-name {
+                font-size: 1.05rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            body {
+                padding: 20px 10px;
+            }
+
+            .container {
+                width: 95%;
+            }
+
+            .header h1 {
+                font-size: 1.3rem;
+                gap: 8px;
+                letter-spacing: 0.5px;
+            }
+
+            .header h1 svg {
+                width: 28px;
+                height: 28px;
+            }
+
+            .request-form {
+                padding: 20px;
+            }
+
+            .request-form h2 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 2C10.89 2 10 2.89 10 4V5H8C6.89 5 6 5.89 6 7V9H4C2.89 9 2 9.89 2 11V20C2 21.11 2.89 22 4 22H20C21.11 22 22 21.11 22 20V11C22 9.89 21.11 9 20 9H18V7C18 5.89 17.11 5 16 5H14V4C14 2.89 13.11 2 12 2M10 7H14V9H10V7M8 11H16V13H8V11M6 15H10V17H6V15M14 15H18V17H14V15M6 19H10V20H6V19M14 19H18V20H14V19Z" />
+                </svg>
+                YukiSub Request Portal !!
+            </h1>
+        </div>
+
+        <!-- Request Form / Limit Message -->
+        {% if request_count < 10 %} <div class="request-form">
+            <h2>Request an Anime !!</h2>
+            <form action="/add" method="POST">
+                <div class="form-group">
+                    <div class="input-wrapper">
+                        <input type="text" name="anime_name" placeholder="Enter anime name..." required
+                            autocomplete="off">
+                        <input type="number" name="total_episodes" placeholder="Total Episodes (e.g. 12)" required
+                            min="1" autocomplete="off">
+                    </div>
+                    <button type="submit">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+                        </svg>
+                        Request
+                    </button>
+                </div>
+            </form>
+    </div>
+    {% else %}
+    <div class="limit-message">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+        </svg>
+        <div>
+            <h3>Requests are currently full (10/10)</h3>
+            <p>Please vote for existing anime or wait for a slot to open.</p>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Section Heading -->
+    <div class="section-heading">Vote for your favorite anime ......</div>
+
+    <!-- Requests List -->
+    <div class="requests-list">
+        {% if requests %}
+        {% for req in requests %}
+        <div class="request-card">
+            <div class="request-info">
+                <div>
+                    <div class="anime-name">{{ req[1] }}</div>
+                    {% if req[4]|int > 0 and req[3] != 'Pending' %}
+                    <div class="episode-progress">Progress: {{ req[5] }}/{{ req[4] }} Episodes</div>
+                    {% endif %}
+                </div>
+                <span class="status-badge status-{{ req[3].lower() }}">
+                    {{ req[3] }}
+                </span>
+            </div>
+            <div class="vote-section">
+                <a href="/vote/{{ req[0] }}" class="vote-btn">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                    </svg>
+                    <span class="vote-text">Vote</span>
+                </a>
+                <span class="vote-count">{{ req[2] }}</span>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="empty-state">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z" />
+            </svg>
+            <h3>No requests yet</h3>
+            <p>Be the first to request an anime!</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>
+            YukiSub Request Portal • Made by Ad
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 2v11h3v9l7-12h-4l4-8z" />
+            </svg>
+        </p>
+    </div>
+    </div>
+</body>
+
+</html>
