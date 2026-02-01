@@ -5,6 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YukiSub Admin Panel</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <style>
         * {
             margin: 0;
@@ -13,7 +21,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, #0f1419 0%, #17212b 100%);
             color: white;
             padding: 40px 20px;
@@ -26,14 +34,28 @@
         }
 
         h1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            font-family: 'Outfit', sans-serif;
             text-align: center;
             margin-bottom: 30px;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
+            font-weight: 800;
             background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h1 svg {
+            width: 40px;
+            height: 40px;
+            fill: #3498db;
+            flex-shrink: 0;
         }
 
         .back-link {
@@ -45,12 +67,14 @@
             text-decoration: none;
             border-radius: 10px;
             transition: background-color 0.3s, transform 0.2s;
+            font-family: 'Inter', sans-serif;
             font-weight: 600;
             font-size: 0.95rem;
         }
 
         .back-link:hover {
             background-color: #3a4a5c;
+            transform: translateY(-2px);
         }
 
         .admin-cards {
@@ -82,6 +106,7 @@
         }
 
         .anime-title {
+            font-family: 'Outfit', sans-serif;
             font-size: 1.3rem;
             font-weight: 700;
             color: #ffffff;
@@ -96,6 +121,7 @@
         }
 
         .meta-item {
+            font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
             color: #a4b0be;
         }
@@ -105,6 +131,7 @@
         }
 
         .status-badge {
+            font-family: 'Outfit', sans-serif;
             display: inline-flex;
             align-items: center;
             padding: 6px 14px;
@@ -143,6 +170,7 @@
         }
 
         .episode-form h4 {
+            font-family: 'Outfit', sans-serif;
             font-size: 0.9rem;
             color: #a4b0be;
             margin-bottom: 12px;
@@ -214,6 +242,7 @@
         }
 
         .btn {
+            font-family: 'Outfit', sans-serif;
             padding: 10px 18px;
             border-radius: 8px;
             text-decoration: none;
@@ -293,7 +322,13 @@
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
+                gap: 10px;
+            }
+
+            h1 svg {
+                width: 32px;
+                height: 32px;
             }
 
             .card-header {
@@ -328,7 +363,13 @@
     <div class="container">
         <a href="/" class="back-link">← Back to Public Portal</a>
 
-        <h1>🔐 Owner Admin Panel</h1>
+        <h1>
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M17.13,17C15.92,18.85 14.11,20.24 12,20.92C9.89,20.24 8.08,18.85 6.87,17C6.53,16.5 6.24,16 6,15.47C6,13.82 8.71,12.47 12,12.47C15.29,12.47 18,13.79 18,15.47C17.76,16 17.47,16.5 17.13,17Z" />
+            </svg>
+            Owner Admin Panel !!
+        </h1>
 
         {% if requests %}
         <div class="admin-cards">
